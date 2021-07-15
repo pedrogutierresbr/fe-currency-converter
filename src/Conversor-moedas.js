@@ -4,8 +4,12 @@ import { Jumbotron, Button, Form, Col, Spinner, Alert, Modal } from "react-boots
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import ListarMoedas from "./components/Listar-moedas";
+import axios from "axios";
 
 function ConversorMoedas() {
+    const FIXER_URL =
+        "http://data.fixer.io/api/latest?access_key=decfec54a4fe3f6b5302ac8d40cb2132";
+
     const [valor, setValor] = useState("1");
     const [moedaDe, setMoedaDe] = useState("BRL");
     const [moedaPara, setMoedaPara] = useState("USD");
@@ -13,6 +17,7 @@ function ConversorMoedas() {
     const [formValidado, setFormValidado] = useState(false);
     const [exibirModal, setExibirModal] = useState(false);
     const [resultadoConversao, setResultadoConversao] = useState("");
+    const [exibirMsgErro, setExibirMsgErro] = useState(false);
 
     function handleValor(event) {
         setValor(event.target.value.replace(/\D/g, ""));
@@ -39,15 +44,46 @@ function ConversorMoedas() {
         setFormValidado(true);
 
         if (event.currentTarget.checkValidity() === true) {
-            //TODO implementar a chamada ao Fixer.io
-            setExibirModal(true);
+            setExibirSpinner(true);
+            axios
+                .get(FIXER_URL)
+                .then((res) => {
+                    const cotacao = obterCotacao(res.data);
+                    if (cotacao) {
+                        setResultadoConversao(
+                            `${valor} ${moedaDe} = ${cotacao} ${moedaPara}`
+                        );
+                        setExibirModal(true);
+                        setExibirSpinner(false);
+                        setExibirMsgErro(false);
+                    } else {
+                        exibirErro();
+                    }
+                })
+                .catch((err) => exibirErro());
         }
+    }
+
+    function obterCotacao(dadosCotacao) {
+        if (!dadosCotacao || dadosCotacao.success !== true) {
+            return false;
+        }
+
+        const cotacaoDe = dadosCotacao.rates[moedaDe];
+        const cotacaoPara = dadosCotacao.rates[moedaPara];
+        const cotacao = (1 / (cotacaoDe * cotacaoPara)) * valor; //formula para obter cotacao usando EURO como base
+        return cotacao.toFixed(2);
+    }
+
+    function exibirErro() {
+        setExibirMsgErro(true);
+        setExibirSpinner(false);
     }
 
     return (
         <div className="container text-center mt-5">
             <h1 className="mb-5">Conversor de moedas</h1>
-            <Alert variant="danger" show={false}>
+            <Alert variant="danger" show={exibirMsgErro}>
                 Erro obtendo dados de conversão, <strong>tente novamente!</strong>
             </Alert>
             <Jumbotron className="p-5">
