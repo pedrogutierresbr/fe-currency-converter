@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Conversor-moedas.css";
 import { Jumbotron, Button, Form, Col, Spinner, Alert, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import ListarMoedas from "./components/Listar-moedas";
 
 function ConversorMoedas() {
     return (
@@ -23,7 +24,9 @@ function ConversorMoedas() {
                             />
                         </Col>
                         <Col sm="3">
-                            <Form.Control as="select"></Form.Control>
+                            <Form.Control as="select">
+                                <ListarMoedas />
+                            </Form.Control>
                         </Col>
                         <Col
                             sm="1"
@@ -32,7 +35,9 @@ function ConversorMoedas() {
                             <FontAwesomeIcon icon={faAngleDoubleRight} />
                         </Col>
                         <Col sm="3">
-                            <Form.Control as="select"></Form.Control>
+                            <Form.Control as="select">
+                                <ListarMoedas />
+                            </Form.Control>
                         </Col>
                         <Col sm="2">
                             <Button variant="success">
