@@ -1,12 +1,14 @@
-# Calculator
+# Currency converter
 
 ## About the project
 
-Project of a calculator with only the main functions like add, subtract, multiply and divide created to exercise my skills with **React Js** and **Bootstrap**. In this project, I was able to use the **TDD process** to avoid bugs and exercise that process.
+Project developed with **React JS** using **Bootstrap** to handle styling. An API (Fixer.io) was consumed using **Axios** to query current exchange rates. In this project, I was able to use the **TDD process** to avoid bugs and exercise that process.
 
 ## Layout
 
-![Layout](https://github.com/pedrogutierresbr/calculadora-reactjs/blob/main/public/assets/gif-desktop.gif?raw=true)
+![Layout](https://github.com/pedrogutierresbr/currency-converter/blob/main/public/assets/screenshot.png?raw=true)
+
+![Layout](https://github.com/pedrogutierresbr/currency-converter/blob/main/public/assets/gif-desktop.gif?raw=true)
 
 ## Technologies
 
@@ -26,7 +28,7 @@ This project was developed with the following technologies:
 
 ```
 * clone the repository
-git clone https://github.com/pedrogutierresbr/calculadora-reactjs.git
+git clone https://github.com/pedrogutierresbr/currency-converter.git
 
 * Access the project folder in the terminal/cmd
 cd calculadora-reactjs
