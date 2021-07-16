@@ -71,8 +71,8 @@ function ConversorMoedas() {
 
         const cotacaoDe = dadosCotacao.rates[moedaDe];
         const cotacaoPara = dadosCotacao.rates[moedaPara];
-        const cotacao = (1 / (cotacaoDe * cotacaoPara)) * valor; //formula para obter cotacao usando EURO como base
-        return cotacao.toFixed(2);
+        const calculoCotacao = (cotacaoPara / cotacaoDe) * valor; //formula para obter cotacao usando EURO como base
+        return calculoCotacao.toFixed(2);
     }
 
     function exibirErro() {
@@ -123,7 +123,11 @@ function ConversorMoedas() {
                             </Form.Control>
                         </Col>
                         <Col sm="2">
-                            <Button variant="success" type="submit">
+                            <Button
+                                variant="success"
+                                type="submit"
+                                data-testid="btn-converter"
+                            >
                                 <span className={exibirSpinner ? "" : "hidden"}>
                                     <Spinner animation="border" size="sm" />
                                 </span>
@@ -144,7 +148,7 @@ function ConversorMoedas() {
                     <Modal.Header closeButton>
                         <Modal.Title>Conversão</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{resultadoConversao}</Modal.Body>
+                    <Modal.Body data-testid="modal">{resultadoConversao}</Modal.Body>
                     <Modal.Footer>
                         <Button variant="success" onClick={handleFecharModal}>
                             Nova Conversão
