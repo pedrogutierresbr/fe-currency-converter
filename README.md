@@ -2,7 +2,7 @@
 
 ## About the project
 
-Project developed with **React JS** using **Bootstrap** to handle styling. An API (Fixer.io) was consumed using **Axios** to query current exchange rates. In this project, I was able to use the **TDD process** to avoid bugs and exercise that process.
+Project developed with **React JS** using **Bootstrap** to handle styling. An API (Fixer.io) was consumed using **Axios** to query current exchange rates. In this project, I was able to use the **TDD process** with **Jest** to avoid bugs and exercise that process.
 
 ## Layout
 
